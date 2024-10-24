@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Django Heroicons</title>
+  <style>
+      .coloured {
+          color: #EF4444;
+      }
+
+      .wrapper {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 10px;
+          gap: 10px;
+      }
+
+      .container {
+          border: 1px solid black;
+          text-align: center;
+      }
+
+      .icons {
+          display: flex;
+          padding: 10px;
+          column-gap: 5px;
+      }
+
+      .icon {
+          border: 1px solid lightgrey;
+          padding: 5px;
+      }
+
+  </style>
+</head>
+<body>
+<div class="wrapper"><p>Colors</p></div>
+<div class="wrapper">
+  <% for variant in variants %>
+  <div class="container">
+    <div class="icons">
+      <div class="icon">
+        <div style="text-align: center; width: 2rem; height: 2rem;">
+          <c-heroicon.<<icons.1>> variant="<<variant>>"/>
+        </div>
+        plain
+      </div>
+      <div class="icon">
+        <div style="text-align: center; width: 2rem; height: 2rem;">
+          <c-heroicon.<<icons.1>> class="coloured" variant="<<variant>>"/>
+        </div>
+        color
+      </div>
+    </div>
+    <<variant>>
+  </div>
+  <% endfor %>
+</div>
+<div class="wrapper"><p>Icons</p></div>
+<div class="wrapper">
+  <% for icon_name in icons %>
+  <div class="container">
+    <div class="icons">
+      <div class="icon">
+        <div style="text-align: center; width: 2rem; height: 2rem;">
+          <c-heroicon.<<icon_name>>/>
+        </div>
+        outline
+      </div>
+      <div class="icon">
+        <div style="text-align: center; width: 2rem; height: 2rem;">
+          <c-heroicon.<<icon_name>> variant="solid"/>
+        </div>
+        solid
+      </div>
+      <div class="icon">
+        <div style="text-align: center; width: 2rem; height: 2rem;">
+          <c-heroicon.<<icon_name>> variant="mini"/>
+        </div>
+        mini
+      </div>
+      <div class="icon">
+        <div style="text-align: center; width: 2rem; height: 2rem;">
+          <c-heroicon.<<icon_name>> variant="micro"/>
+        </div>
+        micro
+      </div>
+    </div>
+    <<icon_name>>
+  </div>
+  <% endfor %>
+</div>
+</body>
+</html>

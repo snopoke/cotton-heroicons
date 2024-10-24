@@ -1,0 +1,31 @@
+{# Credit: Heroicons (https://heroicons.com) #}
+<c-vars
+  class=""
+  variant="outline"
+></c-vars>
+
+{% if variant == "outline" %}
+{% with styles="width: 1.5rem; height: 1.5rem; flex-shrink: 0;" %}
+  <svg aria-hidden="true" class="{{ class }}" data-slot="icon" fill="none" stroke="currentColor" stroke-width="1.5" style="{{ styles }}" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+{% endwith %}
+{% elif variant == "solid" %}
+{% with styles="width: 1.5rem; height: 1.5rem; flex-shrink: 0;" %}
+  <svg aria-hidden="true" class="{{ class }}" data-slot="icon" fill="currentColor" style="{{ styles }}" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v16.19l6.22-6.22a.75.75 0 1 1 1.06 1.06l-7.5 7.5a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 1 1 1.06-1.06l6.22 6.22V3a.75.75 0 0 1 .75-.75Z" fill-rule="evenodd"></path>
+</svg>
+{% endwith %}
+{% elif variant == "mini" %}
+{% with styles="width: 1.25rem; height: 1.25rem; flex-shrink: 0;" %}
+  <svg aria-hidden="true" class="{{ class }}" data-slot="icon" fill="currentColor" style="{{ styles }}" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 3a.75.75 0 0 1 .75.75v10.638l3.96-4.158a.75.75 0 1 1 1.08 1.04l-5.25 5.5a.75.75 0 0 1-1.08 0l-5.25-5.5a.75.75 0 1 1 1.08-1.04l3.96 4.158V3.75A.75.75 0 0 1 10 3Z" fill-rule="evenodd"></path>
+</svg>
+{% endwith %}
+{% elif variant == "micro" %}
+{% with styles="width: 1rem; height: 1rem; flex-shrink: 0;" %}
+<svg aria-hidden="true" class="{{ class }}" data-slot="icon" fill="currentColor" style="{{ styles }}" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M8 2a.75.75 0 0 1 .75.75v8.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.22 3.22V2.75A.75.75 0 0 1 8 2Z" fill-rule="evenodd"></path>
+</svg>
+{% endwith %}
+{% endif %}
