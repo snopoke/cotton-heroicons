@@ -5,7 +5,7 @@ description = "A Django Cotton Component Library of Heroicons"
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
-readme = "README.md"
+author = "Simon Kelly"
 keywords = ["django", "heroicons", "cotton", "component", "library"]
 homepage = "https://github.com/snopoke/cotton-heroicons"
 dependencies = [
