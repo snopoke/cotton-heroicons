@@ -1,17 +1,25 @@
 [project]
 name = "cotton-heroicons"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Django Cotton Component Library of Heroicons"
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
 author = "Simon Kelly"
 keywords = ["django", "heroicons", "cotton", "component", "library"]
-homepage = "https://github.com/snopoke/cotton-heroicons"
+url = "https://github.com/snopoke/cotton-heroicons"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
 dependencies = [
     "django-cotton>=1.2.1",
     "django>=4.2,<5.2",
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/snopoke/cotton-heroicons"
 
 [tool.uv]
 dev-dependencies = [
