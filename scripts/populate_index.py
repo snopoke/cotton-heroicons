@@ -3,7 +3,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 base = Path(__file__).parent
-templates = base.parent / "django_heroicons" / "templates" / "cotton" / "heroicon"
+templates = base.parent / "cotton_heroicons" / "templates" / "cotton" / "heroicon"
 index_path = base.parent / "example-project" / "example" / "templates" / "index.html"
 index_template = base / "index_template.html"
 

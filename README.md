@@ -1,4 +1,4 @@
-# django-heroicons
+# cotton-heroicons
 
 A [Django Cotton](https://django-cotton.com/) Component Library of [Heroicons](https://heroicons.com/)
 
@@ -22,7 +22,7 @@ using the 'class' attribute.
 ## Installation
 
 ```bash
-pip install django-heroicons
+pip install cotton-heroicons
 ```
 
 Update Django settings:
@@ -31,7 +31,7 @@ Update Django settings:
 INSTALLED_APPS = [
     ...
     'django_cotton',
-    'django_heroicons',
+    'cotton_heroicons',
     ...
 ]
 ```

@@ -26,7 +26,7 @@ def get_icons(variant):
 
 
 base = Path(__file__).parent
-templates = base.parent / "django_heroicons" / "templates" / "cotton" / "heroicon"
+templates = base.parent / "cotton_heroicons" / "templates" / "cotton" / "heroicon"
 
 if __name__ == "__main__":
     variants = {}

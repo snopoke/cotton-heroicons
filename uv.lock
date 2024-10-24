@@ -174,7 +174,7 @@ wheels = [
 ]
 
 [[package]]
-name = "django-heroicons"
+name = "cotton-heroicons"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_cotton",
-    "django_heroicons",
+    "cotton_heroicons",
 ]
 
 MIDDLEWARE = [
