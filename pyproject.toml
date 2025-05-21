@@ -15,7 +15,7 @@ classifiers = [
 ]
 dependencies = [
     "django-cotton>=1.2.1",
-    "django>=4.2,<5.2",
+    "django>=4.2",
 ]
 
 [project.urls]
