@@ -1,38 +1,46 @@
 import itertools
+import subprocess
+import tempfile
 from pathlib import Path
 
-import requests
 from bs4 import BeautifulSoup
 
+VARIANT_PATHS = {
+    "outline": "optimized/24/outline",
+    "solid": "optimized/24/solid",
+    "mini": "optimized/20/solid",
+    "micro": "optimized/16/solid",
+}
 
-def get_icons(variant):
-    response = requests.get(f"https://heroicons.com/{variant}")
-    response.raise_for_status()
-    soup = BeautifulSoup(response.content, "html.parser")
 
-    buttons = soup.find_all("button")
-    names = {}
-    for button in buttons:
-        name = button.get("aria-controls")
-        if not name:
-            continue
-
-        svg = button.find("svg")
+def get_icons(variant, repo_dir):
+    svg_dir = Path(repo_dir) / VARIANT_PATHS[variant]
+    icons = {}
+    for svg_file in sorted(svg_dir.glob("*.svg")):
+        soup = BeautifulSoup(svg_file.read_text(), "html.parser")
+        svg = soup.find("svg")
         if svg:
             svg["class"] = "{{ class }}"
             svg["style"] = "{{ styles }}"
-            names[name] = svg
-    return names
+            icons[svg_file.stem] = svg
+    return icons
 
 
 base = Path(__file__).parent
 templates = base.parent / "cotton_heroicons" / "templates" / "cotton" / "heroicon"
 
 if __name__ == "__main__":
-    variants = {}
-    variant_names = ["outline", "solid", "mini", "micro"]
-    for variant in variant_names:
-        variants[variant] = get_icons(variant)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        subprocess.run(
+            ["git", "clone", "--depth", "1",
+             "https://github.com/tailwindlabs/heroicons.git", tmpdir],
+            check=True,
+        )
+
+        variants = {}
+        variant_names = ["outline", "solid", "mini", "micro"]
+        for variant in variant_names:
+            variants[variant] = get_icons(variant, tmpdir)
 
     template = (base / "icon_template.html").read_text()
     all_names = set(
