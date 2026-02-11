@@ -3,7 +3,7 @@ name = "cotton-heroicons"
 version = "0.1.2"
 description = "A Django Cotton Component Library of Heroicons"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = "MIT"
 author = "Simon Kelly"
 keywords = ["django", "heroicons", "cotton", "component", "library"]
