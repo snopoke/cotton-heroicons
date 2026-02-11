@@ -1,29 +1,32 @@
 {# Credit: Heroicons (https://heroicons.com) #}
-<c-vars
-  class=""
-  variant="outline"
-></c-vars>
+<c-vars variant="outline" style="" stroke_width="1.5" stroke_linecap="round" stroke_linejoin="round" />
 
 {% if variant == "outline" %}
-{% with styles="width: 1.5rem; height: 1.5rem; flex-shrink: 0;" %}
-  <svg aria-hidden="true" class="{{ class }}" data-slot="icon" fill="none" stroke="currentColor" stroke-width="1.5" style="{{ styles }}" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 4.5v15m0 0 6.75-6.75M12 19.5l-6.75-6.75" stroke-linecap="round" stroke-linejoin="round"></path>
+{% with default_style="width: 1.5rem; height: 1.5rem; flex-shrink: 0;" %}
+<svg {{ attrs }} style="{{ style|default:default_style }}" aria-hidden="true" data-slot="icon" fill="none" stroke="currentColor" stroke-linecap="{{ stroke_linecap }}" stroke-linejoin="{{ stroke_linejoin }}" stroke-width="{{ stroke_width }}" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 4.5v15m0 0 6.75-6.75M12 19.5l-6.75-6.75"></path>
 </svg>
 {% endwith %}
-{% elif variant == "solid" %}
-{% with styles="width: 1.5rem; height: 1.5rem; flex-shrink: 0;" %}
-  <svg aria-hidden="true" class="{{ class }}" data-slot="icon" fill="currentColor" style="{{ styles }}" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+{% endif %}
+
+{% if variant == "solid" %}
+{% with default_style="width: 1.5rem; height: 1.5rem; flex-shrink: 0;" %}
+<svg {{ attrs }} style="{{ style|default:default_style }}" aria-hidden="true" data-slot="icon" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path clip-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v13.19l5.47-5.47a.75.75 0 1 1 1.06 1.06l-6.75 6.75a.75.75 0 0 1-1.06 0l-6.75-6.75a.75.75 0 1 1 1.06-1.06l5.47 5.47V4.5a.75.75 0 0 1 .75-.75Z" fill-rule="evenodd"></path>
 </svg>
 {% endwith %}
-{% elif variant == "mini" %}
-{% with styles="width: 1.25rem; height: 1.25rem; flex-shrink: 0;" %}
-  <svg aria-hidden="true" class="{{ class }}" data-slot="icon" fill="currentColor" style="{{ styles }}" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+{% endif %}
+
+{% if variant == "mini" %}
+{% with default_style="width: 1.25rem; height: 1.25rem; flex-shrink: 0;" %}
+<svg {{ attrs }} style="{{ style|default:default_style }}" aria-hidden="true" data-slot="icon" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 <path clip-rule="evenodd" d="M10 5a.75.75 0 0 1 .75.75v6.638l1.96-2.158a.75.75 0 1 1 1.08 1.04l-3.25 3.5a.75.75 0 0 1-1.08 0l-3.25-3.5a.75.75 0 1 1 1.08-1.04l1.96 2.158V5.75A.75.75 0 0 1 10 5Z" fill-rule="evenodd"></path>
 </svg>
 {% endwith %}
-{% elif variant == "micro" %}
-{% with styles="width: 1rem; height: 1rem; flex-shrink: 0;" %}
+{% endif %}
+
+{% if variant == "micro" %}
+{% with default_style="width: 1rem; height: 1rem; flex-shrink: 0;" %}
 __MICRO__
 {% endwith %}
 {% endif %}

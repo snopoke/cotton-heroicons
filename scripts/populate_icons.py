@@ -13,16 +13,40 @@ VARIANT_PATHS = {
 }
 
 
+STYLE_PLACEHOLDER = "COTTON_STYLE_PLACEHOLDER"
+ATTRS_PLACEHOLDER = "COTTON_ATTRS_PLACEHOLDER"
+
+
 def get_icons(variant, repo_dir):
     svg_dir = Path(repo_dir) / VARIANT_PATHS[variant]
+    is_outline = variant == "outline"
     icons = {}
     for svg_file in sorted(svg_dir.glob("*.svg")):
         soup = BeautifulSoup(svg_file.read_text(), "html.parser")
         svg = soup.find("svg")
         if svg:
-            svg["class"] = "{{ class }}"
-            svg["style"] = "{{ styles }}"
-            icons[svg_file.stem] = svg
+            # Remove class/style — users pass class via {{ attrs }},
+            # style via {{ style|default:default_style }}
+            svg.attrs.pop("class", None)
+            svg.attrs.pop("style", None)
+            # Make stroke attributes configurable for outline variant
+            if is_outline:
+                svg["stroke-width"] = "{{ stroke_width }}"
+                svg["stroke-linecap"] = "{{ stroke_linecap }}"
+                svg["stroke-linejoin"] = "{{ stroke_linejoin }}"
+                for path in svg.find_all("path"):
+                    path.attrs.pop("stroke-linecap", None)
+                    path.attrs.pop("stroke-linejoin", None)
+            # Use placeholders to avoid BS4 escaping template tags
+            svg[STYLE_PLACEHOLDER] = ""
+            svg[ATTRS_PLACEHOLDER] = ""
+            html = str(svg)
+            html = html.replace(
+                f'{STYLE_PLACEHOLDER}=""',
+                'style="{{ style|default:default_style }}"',
+            )
+            html = html.replace(f'{ATTRS_PLACEHOLDER}=""', "{{ attrs }}")
+            icons[svg_file.stem] = html
     return icons
 
 
@@ -52,7 +76,7 @@ if __name__ == "__main__":
             icon = icons.get(name)
             if icon:
                 local_template = local_template.replace(
-                    f"__{variant.upper()}__", str(icon)
+                    f"__{variant.upper()}__", icon
                 )
         out = templates / f"{name.replace('-', '_')}.html"
         out.write_text(local_template)
