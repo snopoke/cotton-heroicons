@@ -1,0 +1,83 @@
+name: Maintenance
+
+on:
+  schedule:
+    # Every Monday at 06:00 UTC
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync --group dev
+
+      - name: Regenerate icons from upstream heroicons
+        run: uv run python scripts/populate_icons.py
+
+      - name: Create PR if icons changed
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "Update icons from upstream heroicons"
+          title: "Update icons from upstream heroicons"
+          body: |
+            Automated icon sync from [tailwindlabs/heroicons](https://github.com/tailwindlabs/heroicons).
+
+            Regenerated all icon templates from the latest upstream `main` branch.
+          branch: maintenance/sync-icons
+          delete-branch: true
+          labels: maintenance
+
+  update-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Update dependencies
+        run: uv lock --upgrade
+
+      - name: Create PR if lockfile changed
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "Update uv.lock dependencies"
+          title: "Update uv.lock dependencies"
+          body: |
+            Automated update of pinned dependencies in `uv.lock`.
+          branch: maintenance/update-dependencies
+          delete-branch: true
+          labels: maintenance
+
+  update-pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Install pre-commit
+        run: uv tool install pre-commit
+
+      - name: Update pre-commit hooks
+        run: pre-commit autoupdate
+
+      - name: Create PR if hooks changed
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "Update pre-commit hooks"
+          title: "Update pre-commit hooks"
+          body: |
+            Automated update of pre-commit hook versions.
+          branch: maintenance/update-pre-commit
+          delete-branch: true
+          labels: maintenance
