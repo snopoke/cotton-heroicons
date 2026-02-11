@@ -1,23 +1,18 @@
 {# Credit: Heroicons (https://heroicons.com) #}
-<c-vars
-  class=""
-  variant="outline"
-></c-vars>
+<c-vars variant="outline" stroke_width="1.5" stroke_linecap="round" stroke_linejoin="round" />
 
 {% if variant == "outline" %}
-{% with styles="width: 1.5rem; height: 1.5rem; flex-shrink: 0;" %}
-  __OUTLINE__
-{% endwith %}
-{% elif variant == "solid" %}
-{% with styles="width: 1.5rem; height: 1.5rem; flex-shrink: 0;" %}
-  __SOLID__
-{% endwith %}
-{% elif variant == "mini" %}
-{% with styles="width: 1.25rem; height: 1.25rem; flex-shrink: 0;" %}
-  __MINI__
-{% endwith %}
-{% elif variant == "micro" %}
-{% with styles="width: 1rem; height: 1rem; flex-shrink: 0;" %}
+__OUTLINE__
+{% endif %}
+
+{% if variant == "solid" %}
+__SOLID__
+{% endif %}
+
+{% if variant == "mini" %}
+__MINI__
+{% endif %}
+
+{% if variant == "micro" %}
 __MICRO__
-{% endwith %}
 {% endif %}
