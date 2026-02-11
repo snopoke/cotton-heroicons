@@ -1,24 +1,32 @@
 {# Credit: Heroicons (https://heroicons.com) #}
-<c-vars variant="outline" stroke_width="1.5" stroke_linecap="round" stroke_linejoin="round" />
+<c-vars variant="outline" style="" stroke_width="1.5" stroke_linecap="round" stroke_linejoin="round" />
 
 {% if variant == "outline" %}
-<svg {{ attrs }} aria-hidden="true" data-slot="icon" fill="none" stroke="currentColor" stroke-linecap="{{ stroke_linecap }}" stroke-linejoin="{{ stroke_linejoin }}" stroke-width="{{ stroke_width }}" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+{% with default_style="width: 1.5rem; height: 1.5rem; flex-shrink: 0;" %}
+<svg {{ attrs }} style="{{ style|default:default_style }}" aria-hidden="true" data-slot="icon" fill="none" stroke="currentColor" stroke-linecap="{{ stroke_linecap }}" stroke-linejoin="{{ stroke_linejoin }}" stroke-width="{{ stroke_width }}" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M18 12H6"></path>
 </svg>
+{% endwith %}
 {% endif %}
 
 {% if variant == "solid" %}
-<svg {{ attrs }} aria-hidden="true" data-slot="icon" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+{% with default_style="width: 1.5rem; height: 1.5rem; flex-shrink: 0;" %}
+<svg {{ attrs }} style="{{ style|default:default_style }}" aria-hidden="true" data-slot="icon" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path clip-rule="evenodd" d="M5.25 12a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75Z" fill-rule="evenodd"></path>
 </svg>
+{% endwith %}
 {% endif %}
 
 {% if variant == "mini" %}
-<svg {{ attrs }} aria-hidden="true" data-slot="icon" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+{% with default_style="width: 1.25rem; height: 1.25rem; flex-shrink: 0;" %}
+<svg {{ attrs }} style="{{ style|default:default_style }}" aria-hidden="true" data-slot="icon" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 <path d="M6.75 9.25a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Z"></path>
 </svg>
+{% endwith %}
 {% endif %}
 
 {% if variant == "micro" %}
+{% with default_style="width: 1rem; height: 1rem; flex-shrink: 0;" %}
 __MICRO__
+{% endwith %}
 {% endif %}

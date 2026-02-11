@@ -13,6 +13,7 @@ VARIANT_PATHS = {
 }
 
 
+STYLE_PLACEHOLDER = "COTTON_STYLE_PLACEHOLDER"
 ATTRS_PLACEHOLDER = "COTTON_ATTRS_PLACEHOLDER"
 
 
@@ -24,7 +25,8 @@ def get_icons(variant, repo_dir):
         soup = BeautifulSoup(svg_file.read_text(), "html.parser")
         svg = soup.find("svg")
         if svg:
-            # Remove class/style — users pass these via {{ attrs }}
+            # Remove class/style — users pass class via {{ attrs }},
+            # style via {{ style|default:default_style }}
             svg.attrs.pop("class", None)
             svg.attrs.pop("style", None)
             # Make stroke attributes configurable for outline variant
@@ -35,11 +37,16 @@ def get_icons(variant, repo_dir):
                 for path in svg.find_all("path"):
                     path.attrs.pop("stroke-linecap", None)
                     path.attrs.pop("stroke-linejoin", None)
-            # Use a placeholder for {{ attrs }} to avoid BS4 escaping
+            # Use placeholders to avoid BS4 escaping template tags
+            svg[STYLE_PLACEHOLDER] = ""
             svg[ATTRS_PLACEHOLDER] = ""
-            icons[svg_file.stem] = str(svg).replace(
-                f'{ATTRS_PLACEHOLDER}=""', "{{ attrs }}"
+            html = str(svg)
+            html = html.replace(
+                f'{STYLE_PLACEHOLDER}=""',
+                'style="{{ style|default:default_style }}"',
             )
+            html = html.replace(f'{ATTRS_PLACEHOLDER}=""', "{{ attrs }}")
+            icons[svg_file.stem] = html
     return icons
 
 

@@ -27,4 +27,14 @@ if __name__ == "__main__":
     )
     template = env.get_template("index_template.html")
     with open(index_path, "w") as f:
-        f.write(template.render(icons=icons, variants=["outline", "solid", "mini", "micro"]))
+        variant_sizes = {
+            "outline": "1.5rem",
+            "solid": "1.5rem",
+            "mini": "1.25rem",
+            "micro": "1rem",
+        }
+        f.write(template.render(
+            icons=icons,
+            variants=["outline", "solid", "mini", "micro"],
+            variant_sizes=variant_sizes,
+        ))
